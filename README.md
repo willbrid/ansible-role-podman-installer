@@ -1,12 +1,17 @@
 Ansible-role-podman-installer
 =========
 
-Ce rôle Ansible installe le gestionnaire de conteneurs **podman** pour les distributions basées sur RedHat (RHEL, CentOS, Rocky Linux) et Debian (Debian, Ubuntu). 
+Ce rôle Ansible installe le gestionnaire de conteneurs **podman** pour les distributions basées sur RedHat (RHEL, CentOS, Rocky Linux) et Debian (Debian, Ubuntu). Il configure également les serveurs pour l'exécution en mode rootless avec l'utilisateur spécifié, en adaptant son répertoire personnel afin de permettre la création et la gestion des conteneurs en mode service.
+
+Ce rôle a été testé sur les distributions :
+- **Ubuntu 22.04, 24.04**
+- **Rocky linux 8.10**
 
 Exigences
 ------------
 
-La variable **podman_user** doit être définie et attribuée à un utilisateur non root existant sur le système.
+La variable **podman_user** doit être définie et attribuée à un utilisateur non root existant sur le système. <br>
+Les référentiels par défaut des distributions **RedHat** et **Debian** doivent être préalablement configurés.
 
 Description des Variables
 --------------
@@ -14,6 +19,7 @@ Description des Variables
 |Nom|Type|Description|Valeur par défaut|
 |---|----|-----------|-----------------|
 `podman_user`|string|utilisateur non root défini pour exécuter les processus **podman**|`""`
+`podman_version`|string|version de **podman** à installer|`"latest"`
 
 Dépendances
 ------------
