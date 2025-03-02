@@ -6,7 +6,7 @@ Ce rôle Ansible installe le gestionnaire de conteneurs **podman** pour les dist
 Exigences
 ------------
 
-La variable **podman_user** doit être définie et attribuée à un utilisateur existant sur le système.
+La variable **podman_user** doit être définie et attribuée à un utilisateur non root existant sur le système.
 
 Description des Variables
 --------------
