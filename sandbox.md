@@ -47,12 +47,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  # Ubuntu Server
+  # Ubuntu Server 22.04
   config.vm.define "ubuntu-server" do |us|
     us.vm.box = "bento/ubuntu-22.04"
     us.vm.box_version = "202407.23.0"
     us.vm.hostname = "ubuntu-server"
     us.vm.network :private_network, ip: "192.168.56.7"
+  end
+
+  # Ubuntu Server 24.04
+  config.vm.define "ubuntu-server2" do |us|
+    us.vm.box = "alvistack/ubuntu-24.04"
+    us.vm.box_version = "20250301.0.0"
+    us.vm.hostname = "ubuntu-server2"
+    us.vm.network :private_network, ip: "192.168.56.8"
   end
 end
 ```
