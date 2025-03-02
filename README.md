@@ -5,7 +5,7 @@ Ce rôle Ansible installe le gestionnaire de conteneurs **podman** pour les dist
 
 Ce rôle a été testé sur les distributions :
 - **Ubuntu 22.04, 24.04**
-- **Rocky linux 8.10**
+- **Rocky linux 8.10, 9.3**
 
 Exigences
 ------------
