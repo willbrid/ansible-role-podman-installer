@@ -1,0 +1,7 @@
+---
+# handlers file for ansible-role-podman-installer
+- name: Restart podman service
+  ansible.builtin.systemd:
+    name: podman
+    state: restarted
+    enabled: true
