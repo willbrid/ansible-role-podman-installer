@@ -1,0 +1,36 @@
+---
+# tasks file for ansible-role-podman-installer
+- name: Check if the podman user exist
+  ansible.builtin.command: "id -u {{ podman_user }}"
+  register: user_check
+  failed_when: user_check is not defined or user_check.rc != 0
+
+- name: Add the entry to /etc/subuid and /etc/subgid
+  ansible.builtin.lineinfile:
+    path: "{{ item }}"
+    line: "{{ podman_user }}:100000:65536"
+    create: yes
+    state: present
+  with_items:
+  - "/etc/subuid"
+  - "/etc/subgid"
+
+- name: Force ansible_os_family to RedHat if it is Rocky
+  ansible.builtin.set_fact:
+    ansible_os_family: "RedHat"
+  when: ansible_os_family == "Rocky"
+
+- name: Install podman
+  include_tasks: install-for-{{ ansible_os_family }}.yml
+
+- name: Create systemd directory for podman user
+  ansible.builtin.file:
+    path: "/home/{{ podman_user }}/.config/containers/systemd"
+    state: directory
+    mode: '0750'
+    recurse: yes
+    owner: "{{ podman_user }}"
+    group: "{{ podman_user }}"
+
+- name: Enable linger for podman user
+  ansible.builtin.command: loginctl enable-linger "{{ podman_user }}"

@@ -1,0 +1,11 @@
+- name: Install podman {{ podman_version }} in Debian Distro
+  ansible.builtin.apt:
+    name: "{{ item ~ '=' ~ podman_version if item == 'podman' and podman_version != 'latest' else item }}"
+    state: "{{ 'latest' if item == 'podman' and podman_version == 'latest' else 'present' }}"
+    update_cache: yes
+  loop: "{{ _apt }}"
+  register: result
+  until: result is succeeded
+  notify: Restart podman service
+
+# allow_downgrade: "{{ podman_version != 'latest' }}" We will add this instruction after upgrading ansible version to > 2.10

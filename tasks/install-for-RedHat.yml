@@ -1,0 +1,10 @@
+- name: Install podman {{ podman_version }} in RedHat Distro
+  ansible.builtin.dnf:
+    name: "{{ item ~ '-' ~ podman_version if item == 'podman' and podman_version != 'latest' else item }}"
+    state: "{{ 'latest' if item == 'podman' and podman_version == 'latest' else 'present' }}"
+    allow_downgrade: "{{ podman_version != 'latest' }}"
+    update_cache: true
+  loop: "{{ _dnf }}"
+  register: result
+  until: result is succeeded
+  notify: Restart podman service
