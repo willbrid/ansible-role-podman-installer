@@ -1,0 +1,10 @@
+---
+# vars file for ansible-role-podman-installer
+_dnf:
+  - podman
+  - container-selinux
+  - runc
+
+_apt:
+  - podman
+  - runc
