@@ -11,6 +11,7 @@ Exigences
 ------------
 
 La variable **podman_user** doit être définie et attribuée à un utilisateur non root existant sur le système. <br>
+Cet utilisateur ne doit pas être un utilisateur système et doit avoir son répertoire home par défaut, exemple : **/home/username/**. <br>
 Les référentiels par défaut des distributions **RedHat** et **Debian** doivent être préalablement configurés.
 
 Description des Variables
