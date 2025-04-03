@@ -25,15 +25,17 @@
 
 - name: Set XDG_RUNTIME_DIR and DBUS_SESSION_BUS_ADDRESS environment variables
   ansible.builtin.lineinfile:
-    path: "/home/{{ podman_user }}/.bashrc"
+    path: "/home/{{ podman_user }}/{{ item.file }}"
     state: present
-    line: "{{ item }}"
+    line: "{{ item.line }}"
     create: yes
     owner: "{{ podman_user }}"
     group: "{{ podman_user }}"
   with_items:
-    - "export XDG_RUNTIME_DIR=/run/user/{{ user_check.stdout }}"
-    - "export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/{{ user_check.stdout }}/bus"
+    - { file: ".bashrc", line: "export XDG_RUNTIME_DIR=/run/user/{{ user_check.stdout }}" }
+    - { file: ".bashrc", line: "export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/{{ user_check.stdout }}/bus" }
+    - { file: ".bash_profile", line: "export XDG_RUNTIME_DIR=/run/user/{{ user_check.stdout }}" }
+    - { file: ".bash_profile", line: "export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/{{ user_check.stdout }}/bus" }
 
 - name: Create systemd directory for podman user
   ansible.builtin.file:
