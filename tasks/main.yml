@@ -8,7 +8,7 @@
 - name: Add the entry to /etc/subuid and /etc/subgid
   ansible.builtin.lineinfile:
     path: "{{ item }}"
-    line: "{{ podman_user }}:100000:65536"
+    line: "{{ podman_user }}:{{ podman_subid_range }}"
     create: yes
     state: present
   with_items:
