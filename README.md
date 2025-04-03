@@ -44,7 +44,7 @@ vim $HOME/install-podman/requirements.yml
 ```
 - name: ansible-role-podman-installer
   src: https://github.com/willbrid/ansible-role-podman-installer.git
-  version: v0.0.2
+  version: v0.0.3
 ```
 
 ```
