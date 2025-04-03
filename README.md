@@ -20,6 +20,7 @@ Description des Variables
 |Nom|Type|Description|Valeur par défaut|
 |---|----|-----------|-----------------|
 `podman_user`|string|utilisateur non root défini pour exécuter les processus **podman**|`""`
+`podman_subid_range`|string|plage de valeurs d'une entrée /etc/subuid et /etc/subgid pour l'utilisateur **podman**|`"100000:65536"`
 `podman_version`|string|version de **podman** à installer|`"latest"`
 
 Dépendances
