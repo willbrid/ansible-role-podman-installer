@@ -86,7 +86,7 @@ cd $HOME/install-podman && ansible-playbook -i hosts.ini playbook.yml
 Licence
 -------
 
-BSD,MIT
+MIT
 
 Informations sur l'auteur
 ------------------
