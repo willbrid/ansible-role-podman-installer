@@ -1,18 +1,24 @@
 galaxy_info:
   author: William Bridge
+  role_name: podman_installer
+  namespace: willbrid
   description: Podman installation for RedHat/Rocky and Debian/Ubuntu
   license: license (BSD, MIT)
   min_ansible_version: "2.16"
   platforms:
-  - name: Fedora
-    versions:
-    - all
-  - name: Debian
-    versions:
-    - all
+    - name: Rocky
+      versions:
+        - "9.2"
+    - name: Debian
+      versions:
+        - "bookworm"
+        - "bullseye"
+    - name: Ubuntu
+      versions:
+        - "noble"
+        - "jammy"
   galaxy_tags:
-  - podman
-  - system
-  - container
-
+    - podman
+    - system
+    - container
 dependencies: []
