@@ -1,5 +1,4 @@
 ---
-# defaults file for ansible-role-podman-installer
 podman_user: ""
 podman_subid_range: "100000:65536"
 podman_version: "latest"

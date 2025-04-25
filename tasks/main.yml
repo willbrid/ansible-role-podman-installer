@@ -1,5 +1,4 @@
 ---
-# tasks file for ansible-role-podman-installer
 - name: Check if the podman user exist
   ansible.builtin.command: "id -u {{ podman_user }}"
   register: user_check
@@ -12,8 +11,8 @@
     create: yes
     state: present
   with_items:
-  - "/etc/subuid"
-  - "/etc/subgid"
+    - "/etc/subuid"
+    - "/etc/subgid"
 
 - name: Force ansible_os_family to RedHat if it is Rocky
   ansible.builtin.set_fact:
@@ -32,10 +31,10 @@
     owner: "{{ podman_user }}"
     group: "{{ podman_user }}"
   with_items:
-    - { file: ".bashrc", line: "export XDG_RUNTIME_DIR=/run/user/{{ user_check.stdout }}" }
-    - { file: ".bashrc", line: "export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/{{ user_check.stdout }}/bus" }
-    - { file: ".bash_profile", line: "export XDG_RUNTIME_DIR=/run/user/{{ user_check.stdout }}" }
-    - { file: ".bash_profile", line: "export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/{{ user_check.stdout }}/bus" }
+    - {file: ".bashrc", line: "export XDG_RUNTIME_DIR=/run/user/{{ user_check.stdout }}"}
+    - {file: ".bashrc", line: "export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/{{ user_check.stdout }}/bus"}
+    - {file: ".bash_profile", line: "export XDG_RUNTIME_DIR=/run/user/{{ user_check.stdout }}"}
+    - {file: ".bash_profile", line: "export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/{{ user_check.stdout }}/bus"}
 
 - name: Create systemd directory for podman user
   ansible.builtin.file:
