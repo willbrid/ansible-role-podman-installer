@@ -1,0 +1,25 @@
+---
+argument_specs:
+  main:
+    short_description: "Install podman for Linux"
+    description:
+      - "Install podman container runtime for RedHat and Debian distros"
+    author: "WillBrid"
+    options:
+      podman_user:
+        type: str
+        required: true
+        description:
+          - "user that will use podman and his quadlet feature"
+      podman_subid_range:
+        type: str
+        required: false
+        default: "100000:65536"
+        description:
+          - "subuid and subgid range for user"
+      podman_version:
+        type: str
+        required: false
+        default: "latest"
+        description:
+          - "podman version to use"
