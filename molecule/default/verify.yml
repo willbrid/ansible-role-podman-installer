@@ -1,0 +1,19 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  vars:
+    podman_user: "admin"
+  tasks:
+    - name: Run podman container
+      ansible.builtin.command: "podman container run docker.io/library/hello-world:linux"
+      become: yes
+      become_user: "{{ podman_user }}"
+      become_method: su
+      register: container_status
+      changed_when: false
+
+    - name: Check if container was created
+      ansible.builtin.assert:
+        that:
+          - container_status.rc == 0

@@ -1,0 +1,30 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: true
+  vars:
+    podman_user: "admin"
+  tasks:
+    - name: Create podman user group
+      ansible.builtin.group:
+        name: "{{ podman_user }}"
+    - name: Create podman user
+      ansible.builtin.user:
+        name: "{{ podman_user }}"
+        group: "{{ podman_user }}"
+        create_home: yes
+    - name: Add podman_user in a sudo group
+      ansible.builtin.user:
+        name: "{{ podman_user }}"
+        groups: "sudo"
+        append: yes
+      when: ansible_os_family == 'Debian'
+    - name: Add podman_user in a wheel group
+      ansible.builtin.user:
+        name: "{{ podman_user }}"
+        groups: "wheel"
+        append: yes
+      when: ansible_os_family == 'RedHat'
+    - name: Include willbrid.podman_installer
+      ansible.builtin.include_role:
+        name: "willbrid.podman_installer"
