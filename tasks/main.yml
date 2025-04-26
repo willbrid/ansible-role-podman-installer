@@ -3,6 +3,7 @@
   ansible.builtin.command: "id -u {{ podman_user }}"
   register: user_check
   failed_when: user_check is not defined or user_check.rc != 0
+  changed_when: false
 
 - name: Add the entry to /etc/subuid and /etc/subgid
   ansible.builtin.lineinfile:
@@ -47,3 +48,4 @@
 
 - name: Enable linger for podman user
   ansible.builtin.command: loginctl enable-linger "{{ podman_user }}"
+  changed_when: false
