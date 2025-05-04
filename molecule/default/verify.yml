@@ -9,6 +9,7 @@
       ansible.builtin.command: "podman container run docker.io/library/hello-world:linux"
       become: yes
       become_user: "{{ podman_user }}"
+      become_method: ansible.builtin.su
       register: container_status
       changed_when: false
 
