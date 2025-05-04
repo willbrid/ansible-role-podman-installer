@@ -11,6 +11,7 @@
     line: "{{ podman_user }}:{{ podman_subid_range }}"
     create: yes
     state: present
+    mode: 0644
   with_items:
     - "/etc/subuid"
     - "/etc/subgid"
@@ -21,7 +22,7 @@
   when: ansible_os_family == "Rocky"
 
 - name: Install podman
-  include_tasks: install-for-{{ ansible_os_family }}.yml
+  ansible.builtin.include_tasks: install-for-{{ ansible_os_family }}.yml
 
 - name: Set XDG_RUNTIME_DIR and DBUS_SESSION_BUS_ADDRESS environment variables
   ansible.builtin.lineinfile:
@@ -31,6 +32,7 @@
     create: yes
     owner: "{{ podman_user }}"
     group: "{{ podman_user }}"
+    mode: 0644
   with_items:
     - {file: ".bashrc", line: "export XDG_RUNTIME_DIR=/run/user/{{ user_check.stdout }}"}
     - {file: ".bashrc", line: "export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/{{ user_check.stdout }}/bus"}
