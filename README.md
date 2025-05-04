@@ -1,19 +1,16 @@
-Ansible-role-podman-installer
-=========
+# Ansible-role-podman-installer
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/willbrid/ansible-role-podman-installer/blob/main/LICENSE) [![CI](https://github.com/willbrid/ansible-role-podman-installer/actions/workflows/ci.yml/badge.svg)](https://github.com/willbrid/ansible-role-podman-installer/actions/workflows/ci.yml)
 
 Ce rôle Ansible installe le gestionnaire de conteneurs **podman** pour les distributions basées sur RedHat (RHEL, CentOS, Rocky Linux) et Debian (Debian, Ubuntu). Il configure également les serveurs pour l'exécution en mode rootless avec l'utilisateur spécifié, en adaptant son répertoire personnel afin de permettre la création et la gestion des conteneurs en mode service.
 
-Exigences
-------------
+## Exigences
 
 La variable **podman_user** doit être définie et attribuée à un utilisateur non root existant sur le système. <br>
 Cet utilisateur ne doit pas être un utilisateur système et doit avoir son répertoire home par défaut, exemple : **/home/username/**. <br>
 Les référentiels par défaut des distributions **RedHat** et **Debian** doivent être préalablement configurés.
 
-Description des Variables
---------------
+## Description des Variables
 
 |Nom|Type|Description|Valeur par défaut|
 |---|----|-----------|-----------------|
@@ -21,74 +18,60 @@ Description des Variables
 `podman_subid_range`|string|plage de valeurs d'une entrée /etc/subuid et /etc/subgid pour l'utilisateur **podman**|`"100000:65536"`
 `podman_version`|string|version de **podman** à installer|`"latest"`
 
-Dépendances
-------------
+## Dépendances
 
 Aucune.
 
-Exemples Playbook
-----------------
+## Exemples Playbook
 
-- Installation du rôle et définition du fichier d'inventaires
+- Installation du rôle
 
-```
+```bash
 mkdir -p $HOME/install-podman/roles
 ```
 
-```
+```bash
 vim $HOME/install-podman/requirements.yml
 ```
 
-```
+```yaml
 - name: ansible-role-podman-installer
   src: https://github.com/willbrid/ansible-role-podman-installer.git
-  version: v0.0.4
+  version: v0.0.5
 ```
 
-```
+```bash
 cd $HOME/install-podman && ansible-galaxy install -r requirements.yml --roles-path roles
 ```
 
-```
-vim $HOME/install-podman/hosts.ini
-```
-
-```
-[podman]
-192.168.56.6
-192.168.56.7
-```
-
-NB: Les adresses IP définies dans le fichier **$HOME/install-podman/hosts.ini** sont fournies à titre d'exemple et doivent être remplacées par les vôtres.
+> Note: On suppose qu’un fichier `hosts.ini` (dans le repertoire `$HOME/install-podman`) est défini, contenant l’inventaire des serveurs de groupe `all`, utilisant des distributions **Debian** ou **RedHat**.
 
 - Configuration d'un playbook et Installation de podman
 
-```
+```bash
 vim $HOME/install-podman/playbook.yml
 ```
 
-```
+```yaml
 ---
-- hosts: podman
+- hosts: all
   become: yes
 
   vars:
-  - podman_user: "vagrant"
+    podman_user: "vagrant"
 
   roles:
-  - ansible-role-podman-installer
+    - ansible-role-podman-installer
 ```
 
-```
+```bash
 cd $HOME/install-podman && ansible-playbook -i hosts.ini playbook.yml
 ```
 
-Licence
--------
+## Licence
 
 MIT
 
-Informations sur l'auteur
-------------------
+## Informations sur l'auteur
 
 William Bridge NGASSAM
