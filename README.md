@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/willbrid/ansible-role-podman-installer/blob/main/LICENSE) [![CI](https://github.com/willbrid/ansible-role-podman-installer/actions/workflows/ci.yml/badge.svg)](https://github.com/willbrid/ansible-role-podman-installer/actions/workflows/ci.yml)
 
-Ce rôle Ansible installe le gestionnaire de conteneurs **podman** pour les distributions basées sur RedHat (RHEL, CentOS, Rocky Linux) et Debian (Debian, Ubuntu). Il configure également les serveurs pour l'exécution en mode rootless avec l'utilisateur spécifié, en adaptant son répertoire personnel afin de permettre la création et la gestion des conteneurs en mode service.
+Le rôle **ansible-role-podman-installer** permet d'installer le gestionnaire de conteneurs **podman** pour les distributions basées sur RedHat (RHEL, CentOS, Rocky Linux) et Debian (Debian, Ubuntu). Il configure également les serveurs pour l'exécution en mode **rootless** avec l'utilisateur spécifié, en adaptant son répertoire personnel afin de permettre la création et la gestion des conteneurs en mode service.
 
 ## Exigences
 
@@ -36,7 +36,7 @@ vim $HOME/install-podman/requirements.yml
 
 ```yaml
 - name: ansible-role-podman-installer
-  src: https://github.com/willbrid/ansible-role-podman-installer.git
+  src: git+https://github.com/willbrid/ansible-role-podman-installer.git
   version: v0.0.5
 ```
 
@@ -44,7 +44,7 @@ vim $HOME/install-podman/requirements.yml
 cd $HOME/install-podman && ansible-galaxy install -r requirements.yml --roles-path roles
 ```
 
-> Note: On suppose qu’un fichier `hosts.ini` (dans le repertoire `$HOME/install-podman`) est défini, contenant l’inventaire des serveurs de groupe `all`, utilisant des distributions **Debian** ou **RedHat**.
+> Note: On suppose qu’un fichier `hosts.ini` (dans le repertoire `$HOME/install-podman`) est défini, contenant l’inventaire des serveurs de groupe `all`, utilisant des distributions `Debian` ou `RedHat`.
 
 - Configuration d'un playbook et Installation de podman
 
