@@ -27,7 +27,7 @@ Aucune.
 - Installation du rôle
 
 ```bash
-mkdir -p $HOME/install-podman/roles
+mkdir -p $HOME/install-podman
 ```
 
 ```bash
@@ -41,7 +41,7 @@ vim $HOME/install-podman/requirements.yml
 ```
 
 ```bash
-cd $HOME/install-podman && ansible-galaxy install -r requirements.yml --roles-path roles
+cd $HOME/install-podman && ansible-galaxy install --force -r requirements.yml
 ```
 
 > Note: On suppose qu’un fichier `hosts.ini` (dans le repertoire `$HOME/install-podman`) est défini, contenant l’inventaire des serveurs de groupe `all`, utilisant des distributions `Debian` ou `RedHat`.
